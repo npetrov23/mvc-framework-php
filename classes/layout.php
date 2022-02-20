@@ -3,9 +3,10 @@ class Layout {
 	private static $instance;
 	private $relative_path = DIRECTORY_SEPARATOR . "static" . DIRECTORY_SEPARATOR;
 	private $static_types = ["styles" => "css", "script" => "js"];
-	public $include_css;
-	public $include_js;
-	public $include_fonts;
+	private $default_type = "";
+	private $include_css;
+	private $include_js;
+	private $include_fonts;
 
 	public static function get_instance() {
 		self::$instance ?? self::$instance = new self();
@@ -25,20 +26,39 @@ class Layout {
 					return $key;
 			}
 		}
+		else
+		{
+			return $this->default_type;
+		}
 	}
 
 	public function get_css(string $filename) {
 		$type_static = $this->get_static_type($filename);
 		$path = $this->relative_path . "css" . DIRECTORY_SEPARATOR . "$filename";
 		if($type_static == "styles")
-			$this->include_css = "<link rel='stylesheet' href='{$path}'>";
+			$this->include_css .= "<link rel='stylesheet' href='{$path}'>";
 	}
 
 	public function get_js(string $filename) {
 		$type_static = $this->get_static_type($filename);
 		$path = $this->relative_path . "js" . DIRECTORY_SEPARATOR . "$filename";
 		if($type_static == "script")
-			$this->include_js = "<script src='{$path}'></script>";
+			$this->include_js .= "<script src='{$path}'></script>";
+	}
+
+	public function __get($property) {
+		switch ($property) {
+			case 'include_css':
+				return $this->include_css;
+				break;
+			case 'include_js':
+				return $this->include_js;
+			case 'include_fonts':
+				return $this->include_fonts;
+			default:
+				throw new Exception("Свойства не существует", 1);		
+				break;
+		}
 	}
 
 	public function google_fonts(string $name_font) {
@@ -49,7 +69,9 @@ class Layout {
 
 	protected function __construct() {
 		$this->get_css("bootstrap.css");
-		$this->get_js("bootstrap.js");
+		$this->get_css("grid.css");
+		$this->get_css("somefile.txt");
+		$this->get_js("test.js");
 		$this->google_fonts("Source+Sans+Pro");
 	}
 	protected function __clone() {}
