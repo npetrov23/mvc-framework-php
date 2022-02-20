@@ -1,0 +1,15 @@
+.catalog { 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+ }
+.catalog > div {
+	border-style: solid;
+	margin-top: 20px;
+	padding: 10px;
+}
+.catalog__title,
+.catalog__price,
+.catalog__description {
+	text-align: center;
+}
