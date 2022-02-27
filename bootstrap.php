@@ -6,4 +6,3 @@ function layout($class_name) {
 }
 
 spl_autoload_register("layout");
-$obj = layout::get_instance();
