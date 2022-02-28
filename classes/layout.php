@@ -48,10 +48,19 @@ class Layout {
 	}
 	
 	
-	public function google_fonts(string $name_font) {
+	public function google_fonts() {
+		$font = Config::get_config("layout", "font") ?? 'Arial';
+		$font_format = trim(str_replace(" ", "+", Config::get_config("layout", "font") ?? 'Arial'));
 		echo "<link rel='preconnect' href='https://fonts.googleapis.com'>
 		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-		<link href='https://fonts.googleapis.com/css2?family={$name_font}&display=swap' rel='stylesheet'>";
+		<link href='https://fonts.googleapis.com/css2?family={$font_format}&display=swap' rel='stylesheet'>
+		
+		<style>
+		:root{
+			font-family: $font, sans-serif;
+		}
+		</style>
+		";
 	}
 
 	protected function __construct() {

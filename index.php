@@ -10,6 +10,17 @@
 </head>
 <body>
 	<p>Главная страница</p>
-	<?print_r(Config::get_config("layout", "font1"));?>
+	<!-- <?echo var_dump(Config::get_config("layout", "font"));?>
+	<br>
+	<?echo var_dump(Config::get_config("layout", "font"));?>
+	<br>
+	<?echo var_dump(Config::get_config("layout", "font1"));?>
+	<br>
+	<?echo var_dump(Config::get_config("layout1", "font"));?>
+	<br>
+	<?echo var_dump(Config::get_config("layout1"));?>
+	<br>
+	<?var_dump(Config::get_config("layout"));?> -->
+
 </body>
 </html>

@@ -1,21 +1,47 @@
 <?
 class Config {
-    private static $config_cache = "";
+    private static $config_cache = [];
 
     public static function get_config(string $config_name, string $config_key = "") {
-        return self::include_config($config_name, $config_key);
-    }
+        $config = self::include_config($config_name);
 
-    public static function include_config(string $config_name, string $config_key = "") {
-        $path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "configs" . DIRECTORY_SEPARATOR . $config_name . ".php";
-        if(self::$config_cache == "") {
-            if(file_exists($path)) {
-                self::$config_cache = include_once($path);
-                return array_key_exists($config_key, self::$config_cache) ? self::$config_cache[$config_key] : self::$config_cache;
+        if($config != null) {
+            if($config_key == "") {
+                return $config;
+            }
+            else
+            {
+                if(array_key_exists($config_key, $config)) {
+                    return $config[$config_key];
+                }
+                else {
+                    return null;
+                }
             }
         }
-        else {
-            return self::$config_cache;
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public static function include_config(string $config_name) {
+        $path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "configs" . DIRECTORY_SEPARATOR . $config_name . ".php";
+        if(array_key_exists($config_name, self::$config_cache)) {
+            //echo "cache ";
+            return self::$config_cache[$config_name];
+        }
+        else
+        {
+            if(file_exists($path)) {
+                self::$config_cache[$config_name] = include_once($path);
+                return self::$config_cache[$config_name];
+            }
+            else
+            {   
+                return null;
+            }
         }
     }
 }
