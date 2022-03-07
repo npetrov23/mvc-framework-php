@@ -10,6 +10,8 @@
 </head>
 <body>
 	<p>Главная страница</p>
+
+	<? Db::get_instance() ?>
 	<!-- <?echo var_dump(Config::get_config("layout", "font"));?>
 	<br>
 	<?echo var_dump(Config::get_config("layout", "font"));?>
