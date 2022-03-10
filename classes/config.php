@@ -26,14 +26,14 @@ class Config {
 
     }
 
-    public static function include_config(string $config_name) {
-        $path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "configs" . DIRECTORY_SEPARATOR . $config_name . ".php";
+    private static function include_config(string $config_name) {
         if(array_key_exists($config_name, self::$config_cache)) {
             //echo "cache ";
             return self::$config_cache[$config_name];
         }
         else
         {
+            $path = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "configs" . DIRECTORY_SEPARATOR . $config_name . ".php";
             if(file_exists($path)) {
                 self::$config_cache[$config_name] = include_once($path);
                 return self::$config_cache[$config_name];

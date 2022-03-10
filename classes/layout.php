@@ -65,7 +65,7 @@ class Layout {
 
 	protected function __construct() {
 		$this->get_static("bootstrap.css");
-		$this->google_fonts("Source+Sans+Pro");
+		$this->google_fonts();
 	}
 	protected function __clone() {}
 	public function __wakeup() {
