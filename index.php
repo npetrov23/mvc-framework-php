@@ -11,18 +11,17 @@
 <body>
 	<p>Главная страница</p>
 
-	<? Db::get_instance() ?>
-	<!-- <?echo var_dump(Config::get_config("layout", "font"));?>
-	<br>
-	<?echo var_dump(Config::get_config("layout", "font"));?>
-	<br>
-	<?echo var_dump(Config::get_config("layout", "font1"));?>
-	<br>
-	<?echo var_dump(Config::get_config("layout1", "font"));?>
-	<br>
-	<?echo var_dump(Config::get_config("layout1"));?>
-	<br>
-	<?var_dump(Config::get_config("layout"));?> -->
+	<? 
+	    $columns_test = [
+			"name" => ["type" => Db::T_VARCHAR, "null" => "Y", "primary" => "N"],
+			"age" => ["type" => Db::T_INT, "null" => "Y", "primary" => "N"],
+			"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
+		];
+
+	Db::get_instance()->create_table("test23", $columns_test);
+
+	?>
+
 
 </body>
 </html>
