@@ -20,7 +20,8 @@
 			
 		];
 
-	Db::get_instance()->create_table("table_without_primary", $columns_test);
+	//Db::get_instance()->create_table("table_without_primary", $columns_test);
+	var_dump(Db::get_instance()->table_exists("table_without_primary"));
 
 	?>
 

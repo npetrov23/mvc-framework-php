@@ -65,6 +65,11 @@ class Db {
         return $result_sql;
     }
 
+    public function table_exists(string $table_name) : bool {
+        $statement = $this->pdo->query("SHOW TABLES LIKE '$table_name'");
+        return $statement->fetch() == false ? false : true;
+    }
+
     protected function __construct() {
         $this->connect();
     }
