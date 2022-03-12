@@ -13,12 +13,14 @@
 
 	<? 
 	    $columns_test = [
+			"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
 			"name" => ["type" => Db::T_VARCHAR, "null" => "Y", "primary" => "N"],
 			"age" => ["type" => Db::T_INT, "null" => "Y", "primary" => "N"],
-			"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
+			"some" => ["type" => Db::T_VARCHAR, "null" => "N", "primary" => "N"],
+			
 		];
 
-	Db::get_instance()->create_table("test23", $columns_test);
+	Db::get_instance()->create_table("table_without_primary", $columns_test);
 
 	?>
 

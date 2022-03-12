@@ -1,4 +1,4 @@
 <?
 return [
-    "font" => "Oswald"
+    "font" => "Montserrat"
 ];

@@ -4,11 +4,10 @@ class Db {
     private static $pdo;
     private static $instance;
     const T_INT = "INT";
-    const T_VARCHAR = "VARCHAR(255)"; //не очень понятно как через константы задавать значения, например 255 для varchar
+    const T_VARCHAR = "VARCHAR(255)";
     const T_NOT_NULL = "NOT NULL";
     const T_NULL = "NULL";
     const A_I = "AUTO_INCREMENT";
-
 
     public static function get_instance() {
 		if(!isset(self::$instance)) {
@@ -49,25 +48,20 @@ class Db {
         $statement->execute();
     }
 
-
-    // пример создания таблицы
-    // $columns_test = [
-    //     "name" => ["type" => Db::T_VARCHAR, "null" => "Y", "primary" => "N"],
-    //     "age" => ["type" => Db::T_INT, "null" => "Y", "primary" => "N"],
-    //     "id23" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
-    // ];
-    // Db::get_instance()->create_table("test", $columns_test);
-
     private function build_sql(array $columns) : string {
         $result_sql = "";
+        $primary_key = "";
         foreach($columns as $column_name => $column_param) {
             $result_sql .= "$column_name {$column_param['type']} ";
             $column_param["null"] == "Y" ? $result_sql .= self::T_NULL : $result_sql .= self::T_NOT_NULL;
-            $column_param["primary"] == "Y" ? $result_sql .= " ".self::A_I : "";
+            if($column_param["primary"] == "Y") {
+                $result_sql .= " ".self::A_I;
+                $primary_key = $column_name;
+            }
             $result_sql .= ", ";
-            $column_param["primary"] == "Y" ? $result_sql .= " PRIMARY KEY ({$column_name})" : "";
         }
 
+        $primary_key == "" ? $result_sql .= "`id`" . self::T_INT . " " . self::A_I . ", PRIMARY KEY (`id`)" : $result_sql .= "PRIMARY KEY ($primary_key)";
         return $result_sql;
     }
 
