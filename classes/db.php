@@ -66,8 +66,23 @@ class Db {
     }
 
     public function table_exists(string $table_name) : bool {
-        $statement = $this->pdo->query("SHOW TABLES LIKE '$table_name'");
+        $sql = "SHOW TABLES LIKE '$table_name'";
+        $statement = $this->pdo->query($sql);
         return $statement->fetch() == false ? false : true;
+    }
+
+    public function insert(string $table_name, array $table_values){
+        $column_name = implode(",", array_keys($table_values));
+        // $values = "'" . implode("', '", $table_values) . "'";
+        $placeholder = ":" . implode(", :", array_keys($table_values));
+        $sql = "INSERT INTO $table_name ($column_name) VALUE ($placeholder)";
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($table_values);
+        // $values = "'" . implode("', '", $table_value) . "'";
+        // $sql = "INSERT INTO $table_name VALUE ($values)";
+        // $this->pdo->prepare($sql);
+        // return $this->pdo->lastinsertid();
     }
 
     protected function __construct() {

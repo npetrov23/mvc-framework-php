@@ -20,8 +20,16 @@
 			
 		];
 
-	//Db::get_instance()->create_table("table_without_primary", $columns_test);
-	var_dump(Db::get_instance()->table_exists("table_without_primary"));
+		$data = [
+			"id" => 1,
+			"name" => "Nikita",
+			"age" => 22,
+			"some" => "Nikita is programmer"
+		];
+
+		// Db::get_instance()->create_table("test", $columns_test);
+		// var_dump(Db::get_instance()->table_exists("table_without_primary"));
+		echo Db::get_instance()->insert("test", $data);
 
 	?>
 
