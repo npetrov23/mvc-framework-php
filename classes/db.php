@@ -73,16 +73,27 @@ class Db {
 
     public function insert(string $table_name, array $table_values){
         $column_name = implode(",", array_keys($table_values));
-        // $values = "'" . implode("', '", $table_values) . "'";
         $placeholder = ":" . implode(", :", array_keys($table_values));
         $sql = "INSERT INTO $table_name ($column_name) VALUE ($placeholder)";
 
         $statement = $this->pdo->prepare($sql);
         $statement->execute($table_values);
-        // $values = "'" . implode("', '", $table_value) . "'";
-        // $sql = "INSERT INTO $table_name VALUE ($values)";
-        // $this->pdo->prepare($sql);
-        // return $this->pdo->lastinsertid();
+    }
+
+    public function select(string $table_name, string $where = "", $limit = 0) {
+        $sql = "SELECT * FROM $table_name";
+        if($where != "") {
+            $sql .= " WHERE $where";
+        }
+        if($limit != 0) {
+            $sql .= " LIMIT $limit";
+        }
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        $row = $statement->fetch();
+
+        return $row;
     }
 
     protected function __construct() {

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<p>Главная страница</p>
-
+	<pre>
 	<? 
 	    $columns_test = [
 			"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
@@ -21,17 +21,19 @@
 		];
 
 		$data = [
-			"id" => 1,
-			"name" => "Nikita",
-			"age" => 22,
-			"some" => "Nikita is programmer"
+			"id" => 2,
+			"name" => "Nikita1",
+			"age" => 221,
+			"some" => "Nikita is programmer1"
 		];
 
 		// Db::get_instance()->create_table("test", $columns_test);
 		// var_dump(Db::get_instance()->table_exists("table_without_primary"));
-		echo Db::get_instance()->insert("test", $data);
+		// echo Db::get_instance()->insert("test", $data);
+		print_r(Db::get_instance()->select("test"));
 
 	?>
+	</pre>
 
 
 </body>
