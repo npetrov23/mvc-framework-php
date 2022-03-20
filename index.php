@@ -12,25 +12,29 @@
 	<p>Главная страница</p>
 	<pre>
 	<? 
-	    $columns_test = [
-			"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
-			"name" => ["type" => Db::T_VARCHAR, "null" => "Y", "primary" => "N"],
-			"age" => ["type" => Db::T_INT, "null" => "Y", "primary" => "N"],
-			"some" => ["type" => Db::T_VARCHAR, "null" => "N", "primary" => "N"],
-			
-		];
+	    // $test = [
+		// 	"id" => ["type" => Db::T_INT, "null" => "N", "primary" => "Y"],
+		// 	"name" => ["type" => Db::T_VARCHAR, "null" => "Y", "primary" => "Y"],
+		// 	"age" => ["type" => Db::T_INT, "null" => "Y", "primary" => "Y"],
+		// 	"some" => ["type" => Db::T_VARCHAR, "null" => "N", "primary" => "Y"],
+		// ];
 
-		$data = [
-			"id" => 2,
-			"name" => "Nikita1",
-			"age" => 221,
-			"some" => "Nikita is programmer1"
-		];
+		// $test["id"]["primary"] = "N";
+		// echo $test["id"]["primary"];
+
+		// $data = [
+		// 	"id" => 2,
+		// 	"name" => "Nikita1",
+		// 	"age" => 221,
+		// 	"some" => "Nikita is programmer1"
+		// ];
 
 		// Db::get_instance()->create_table("test", $columns_test);
 		// var_dump(Db::get_instance()->table_exists("table_without_primary"));
 		// echo Db::get_instance()->insert("test", $data);
-		print_r(Db::get_instance()->select("test"));
+		// print_r(Db::get_instance()->select("test"));
+
+		new Product;
 
 	?>
 	</pre>

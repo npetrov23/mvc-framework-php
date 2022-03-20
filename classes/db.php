@@ -43,7 +43,6 @@ class Db {
         $param_table = $this->build_sql($columns);
         $db_name = Config::get_config("db", "db_name");
         $sql = "CREATE TABLE IF NOT EXISTS $db_name.$name ($param_table) ENGINE = InnoDB;";
-        
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
     }
@@ -54,14 +53,17 @@ class Db {
         foreach($columns as $column_name => $column_param) {
             $result_sql .= "$column_name {$column_param['type']} ";
             $column_param["null"] == "Y" ? $result_sql .= self::T_NULL : $result_sql .= self::T_NOT_NULL;
-            if($column_param["primary"] == "Y") {
-                $result_sql .= " ".self::A_I;
-                $primary_key = $column_name;
+            if(array_key_exists("primary", $column_param)) {
+                if($column_param["primary"] == "Y") {
+                    $result_sql .= " " . self::A_I;
+                    $primary_key = $column_name;
+                }
             }
+
             $result_sql .= ", ";
         }
 
-        $primary_key == "" ? $result_sql .= "`id`" . self::T_INT . " " . self::A_I . ", PRIMARY KEY (`id`)" : $result_sql .= "PRIMARY KEY ($primary_key)";
+        $result_sql .= "primary key ($primary_key)";
         return $result_sql;
     }
 
