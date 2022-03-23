@@ -77,7 +77,7 @@ class Db {
         $column_name = implode(",", array_keys($table_values));
         $placeholder = ":" . implode(", :", array_keys($table_values));
         $sql = "INSERT INTO $table_name ($column_name) VALUE ($placeholder)";
-
+        // echo $sql;
         $statement = $this->pdo->prepare($sql);
         $statement->execute($table_values);
     }

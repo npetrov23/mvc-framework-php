@@ -5,7 +5,7 @@ class Product extends Model {
         "id" => ["type" => Db::T_VARCHAR, "null" => "Y"],
         "name" => ["type" => Db::T_VARCHAR, "null" => "Y"],
         "age" => ["type" => Db::T_INT, "null" => "Y"],
-        "some" => ["type" => Db::T_VARCHAR, "null" => "N"],
+        "some" => ["type" => Db::T_VARCHAR, "null" => "Y"],
     ];
 
     
