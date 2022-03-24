@@ -1,15 +1,22 @@
 <?
 class Model {
-    protected $table_name;
-    protected $table_column;
+    protected $table_name = "products2";    
+    protected $table_column = [
+        "name" => ["type" => Db::T_VARCHAR, "null" => "Y"],
+        "age" => ["type" => Db::T_INT, "null" => "Y"],
+        "some" => ["type" => Db::T_VARCHAR, "null" => "Y"],
+    ];
     protected $cache_tables = [];
     protected $primary_key = "id";
     protected $properties = [];
-    protected $loaded;
+    protected $loaded = false;
     protected $id;
 
     public function __construct($id = 0) {
         $this->check_table();
+        if($id) {
+            $this->get($id);
+        }
     }
     
     public function create_table() {
@@ -34,22 +41,15 @@ class Model {
     }
 
     public function save() {
-        if($this->loaded) {
-            echo "yes";
-        }
-        else
-        {
-            echo "no";
-        }
         $this->loaded ? $this->update() : $this->create();
+        
     }
 
     public function update() {
-        //some
+        echo "its update query";
     }
 
     public function create() {
-        echo 23;
         $this->loaded = true;
         $this->id = Db::get_instance()->insert($this->table_name, $this->properties);
     }
@@ -58,6 +58,11 @@ class Model {
         foreach($properties as $column => $value) {
             $this->$column = $value;
         }
+    }
+
+    protected function get($id) {
+        $row = Db::get_instance()->select($this->table_name, "id = {$id}", 1);
+        print_r($row);
     }
 
     public function __set($name, $value) {
@@ -71,4 +76,4 @@ class Model {
             return $this->properties[$name];
         }
     }
-}   
+} 

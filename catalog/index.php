@@ -1,7 +1,7 @@
 <? require_once('../bootstrap.php');
 $products = [
 	["title" => "Товар1",
-	 "description" => "Описание товара 2",
+	 "description" => "Описание товара 1",
 	 "price" => 10],
 	["title" => "Товар 2",
 	 "description" => "Описание товара 2",
@@ -13,6 +13,12 @@ $products = [
 	 "description" => "Описание товара 4",
 	 "price" => 40],
 ];
+
+foreach($products as $product) {
+	$table = new Product();
+	$table->set($product);
+	$table->save();
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
