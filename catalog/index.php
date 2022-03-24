@@ -14,11 +14,18 @@ $products = [
 	 "price" => 40],
 ];
 
-foreach($products as $product) {
-	$table = new Product();
-	$table->set($product);
-	$table->save();
-}
+// foreach($products as $product) {
+// 	$table = new Product();
+// 	$table->set($product);
+// 	$table->save();
+// }
+
+echo "<pre>";
+$table = new Product(19);
+echo $table->price;
+
+// print_r($table->find_all());
+// echo "</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="ru">

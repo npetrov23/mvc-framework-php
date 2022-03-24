@@ -61,9 +61,21 @@ class Model {
     }
 
     protected function get($id) {
-        $row = Db::get_instance()->select($this->table_name, "id = {$id}", 1);
-        print_r($row);
+        $statement = Db::get_instance()->select($this->table_name, "id = {$id}", 1);
+        $row = $statement->fetch();
+        !$row ? "" : $this->set($row);
     }
+
+    public function find_all($where = "", $limit = 0) {
+        $statement = Db::get_instance()->select($this->table_name, $where, $limit);
+        while($row = $statement->fetch()){
+            $models[] = new Product($row["id"]);
+        }
+        print_r($models);
+        //return $models;
+    }
+
+    
 
     public function __set($name, $value) {
         if(in_array($name, array_keys($this->table_column))) {
@@ -73,7 +85,7 @@ class Model {
 
     public function __get($name) {
         if(in_array($name, array_keys($this->table_column))) {
-            return $this->properties[$name];
+            echo $this->properties[$name];
         }
     }
 } 

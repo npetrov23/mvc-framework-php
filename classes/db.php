@@ -94,9 +94,9 @@ class Db {
 
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
-        $row = $statement->fetch();
+        
 
-        return $row;
+        return $statement;
     }
 
     protected function __construct() {
