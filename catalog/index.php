@@ -20,12 +20,10 @@ $products = [
 // 	$table->save();
 // }
 
-echo "<pre>";
-$table = new Product(19);
-echo $table->price;
+$model_products = new Product();
+// $products = $model_products->find('title = "Товар 2"');
+$products = $model_products->find_all();
 
-// print_r($table->find_all());
-// echo "</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -39,13 +37,13 @@ echo $table->price;
 </head>
 <body>
 	<div class="catalog">
-	<?foreach($products as $number_product => $product) {?>
-		<div class="catalog__product">
-			<div class="catalog__title"><b><?echo $products[$number_product]["title"]?></b></div>
-			<div class="catalog__description"><?echo $products[$number_product]["description"]?></div>
-			<div class="catalog__price"><?echo $products[$number_product]["price"]?>р</div>
-		</div>
-	<?}?>
+		<?foreach($products as $product) {?>
+			<div class="catalog__product">
+				<div class="catalog__title"><b><?$product->title?></b></div>
+				<div class="catalog__description"><?$product->description?></div>
+				<div class="catalog__price"><?$product->price?>р</div>
+			</div>
+		<?}?>
 	</div>
 
 	<?echo Layout::get_instance()->get_static("test.js");?>

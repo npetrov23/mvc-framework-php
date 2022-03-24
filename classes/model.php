@@ -55,8 +55,8 @@ class Model {
     }
 
     public function set($properties) {
-        foreach($properties as $column => $value) {
-            $this->$column = $value;
+        foreach($properties as $name => $value) {
+            $this->$name = $value;
         }
     }
 
@@ -68,14 +68,24 @@ class Model {
 
     public function find_all($where = "", $limit = 0) {
         $statement = Db::get_instance()->select($this->table_name, $where, $limit);
-        while($row = $statement->fetch()){
+
+        $models = [];
+        while($row = $statement->fetch())
+        {
             $models[] = new Product($row["id"]);
         }
-        print_r($models);
-        //return $models;
+
+        return $models;
     }
 
-    
+
+    public function find($where = "") {
+        $statement = Db::get_instance()->select($this->table_name, $where, 1);
+        $row = $statement->fetch();
+        $models = [];
+        $models[] = new Product($row["id"]);
+        return $models;
+    }
 
     public function __set($name, $value) {
         if(in_array($name, array_keys($this->table_column))) {
