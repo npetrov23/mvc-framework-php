@@ -9,7 +9,13 @@
 	<title>Document</title>
 </head>
 <body>
-	<p>Главная страница</p>
+	<? 
+			try {
+				Route::get_instance()->load_file();
+			} catch (Exception $e) {
+				echo $e;
+			}
+	?>
 
 </body>
 </html>

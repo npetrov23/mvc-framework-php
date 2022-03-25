@@ -1,4 +1,4 @@
-<? require_once('../bootstrap.php');
+<?
 $products = [
 	["title" => "Товар1",
 	 "description" => "Описание товара 1",
