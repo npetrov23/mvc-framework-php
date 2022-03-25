@@ -63,7 +63,9 @@ class Model {
     protected function get($id) {
         $statement = Db::get_instance()->select($this->table_name, "id = {$id}", 1);
         $row = $statement->fetch();
-        !$row ? "" : $this->set($row);
+        if($row) {
+            $this->set($row);
+        }
     }
 
     public function find_all($where = "", $limit = 0) {
@@ -72,7 +74,7 @@ class Model {
         $models = [];
         while($row = $statement->fetch())
         {
-            $models[] = new Product($row["id"]);
+            $models[] = new $this($row["id"]);
         }
 
         return $models;
@@ -83,7 +85,7 @@ class Model {
         $statement = Db::get_instance()->select($this->table_name, $where, 1);
         $row = $statement->fetch();
         $models = [];
-        $models[] = new Product($row["id"]);
+        $models[] = new $this($row["id"]);
         return $models;
     }
 
