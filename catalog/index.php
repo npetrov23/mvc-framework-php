@@ -21,8 +21,7 @@ $products = [
 // }
 
 $model_products = new Product();
-$products = $model_products->find();
-// $products = $model_products->find_all();
+$products = $model_products->find_all();
 
 ?>
 <!DOCTYPE html>

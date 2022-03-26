@@ -8,6 +8,6 @@ try {
 	}
 	else
 	{
-		echo $e;
+		echo $e->getMessage();
 	}
 }
