@@ -23,6 +23,7 @@ $products = [
 $model_products = new Product();
 $products = $model_products->find_all();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -31,21 +32,21 @@ $products = $model_products->find_all();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?echo Layout::get_instance()->get_static("grid.css");?>
 	<?echo Layout::get_instance()->include_css();?>
-
 	<title>Каталог</title>
 </head>
 <body>
 	<div class="catalog">
 		<?foreach($products as $product) {?>
 			<div class="catalog__product">
-				<div class="catalog__title"><b><?$product->title?></b></div>
+				<div class="catalog__title"><a href="<?$product->id?>"><?$product->title?></a></div>
 				<div class="catalog__description"><?$product->description?></div>
 				<div class="catalog__price"><?$product->price?>р</div>
 			</div>
 		<?}?>
 	</div>
 
-	<?echo Layout::get_instance()->get_static("test.js");?>
 	<?echo Layout::get_instance()->include_js();?>
 </body>
 </html>
+
+

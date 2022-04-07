@@ -1,16 +1,12 @@
 <?
 class Model {
-    protected $table_name = "products2";    
-    protected $table_column = [
-        "name" => ["type" => Db::T_VARCHAR, "null" => "Y"],
-        "age" => ["type" => Db::T_INT, "null" => "Y"],
-        "some" => ["type" => Db::T_VARCHAR, "null" => "Y"],
-    ];
+    protected $table_name = "";    
+    protected $table_column = [];
     protected $cache_tables = [];
     protected $primary_key = "id";
     protected $properties = [];
     protected $loaded = false;
-    protected $id;
+    //protected $id;
 
     public function __construct($id = 0) {
         $this->check_table();
@@ -56,6 +52,7 @@ class Model {
 
     public function set($properties) {
         foreach($properties as $name => $value) {
+            
             $this->$name = $value;
         }
     }
@@ -80,13 +77,16 @@ class Model {
         return $models;
     }
 
-
     public function find($where = "") {
         $statement = Db::get_instance()->select($this->table_name, $where, 1);
         $row = $statement->fetch();
         $models = [];
         $models[] = new $this($row["id"]);
         return $models;
+    }
+
+    public function json() {
+        return json_encode($this->properties);
     }
 
     public function __set($name, $value) {

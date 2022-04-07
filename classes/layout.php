@@ -65,6 +65,7 @@ class Layout {
 
 	protected function __construct() {
 		$this->get_static("bootstrap.css");
+		$this->get_static("vue.js");
 		$this->google_fonts();
 	}
 	protected function __clone() {}

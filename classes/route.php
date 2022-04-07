@@ -15,6 +15,7 @@ class Route {
         foreach($this->rules as $rule) {
             $preg = "#^{$rule["url"]}$#";
             $page = preg_match($preg, $this->url, $matches);
+
             if($page) {
                 $this->set_param($matches);
                 require_once $rule["file"];
