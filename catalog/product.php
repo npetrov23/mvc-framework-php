@@ -1,5 +1,5 @@
 <? $id = Route::get_instance()->get_param("product_id");
-$product = new Product($id);?>
+$product = new \catalog\model\Product($id);?>
 
 <!DOCTYPE html>
 <html lang="en">

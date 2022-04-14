@@ -6,11 +6,11 @@ return [
     ],
     [
         "url" => "/catalog/(?<product_id>[^/]*)/",
-        "file" => "catalog\product.php"
+        "file" =>  "catalog\product.php"
     ],
     [
         "url" => "/catalog/rest/product/(?<product_id>[^/]*)/",
-        "file" => "catalog\\rest.php"
+        "file" => "catalog\\rest\product.php"
     ],
     [
         'url' => '/(?<module>[^/]*)/rest/(?<rest>[^/]*)/(?<action>[^/]*)/(?<id>[^/]*)/',
