@@ -20,7 +20,7 @@ $products = [
 // 	$table->save();
 // }
 
-$model_products = new Product();
+$model_products = new catalog\model\Product();
 $products = $model_products->find_all();
 
 

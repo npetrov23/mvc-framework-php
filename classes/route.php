@@ -15,15 +15,29 @@ class Route {
         foreach($this->rules as $rule) {
             $preg = "#^{$rule["url"]}$#";
             $page = preg_match($preg, $this->url, $matches);
-
             if($page) {
                 $this->set_param($matches);
-                require_once $rule["file"];
-                return;
+                if(array_key_exists("controller", $rule)) {
+                    $this->controller_func_execute($rule["controller"]);
+                    return;
+                }
+                if(array_key_exists("file", $rule)) {
+                    require_once $rule["file"];
+                    return;
+                }
             }
         }
 
         throw new Exception("Page not found", 404);
+    }
+
+    private function controller_func_execute(string $function) {
+        if(function_exists($function)) {
+            call_user_func($function);
+        }
+        else {
+            echo "dont exists";
+        }
     }
 
     private function __construct() {

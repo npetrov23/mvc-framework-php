@@ -1,7 +1,8 @@
 <?
 
 function layout($class_name) {
-	$filename = __DIR__ . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . strtolower($class_name) . ".php";
+	$path = str_replace('\\', '/', strtolower($class_name) );
+	$filename = __DIR__ . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $path . ".php";
 	require_once($filename);
 }
 
