@@ -32,11 +32,8 @@ class Route {
     }
 
     private function controller_func_execute(string $function) {
-        // if(function_exists($function)) {
-             call_user_func($function);
-        // }
-        // else {
-        //     echo "dont exists";
+        // if(method_exists('\Rest', $function)){
+            call_user_func($function);
         // }
     }
 

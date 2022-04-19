@@ -99,6 +99,12 @@ class Db {
         return $statement;
     }
 
+    public function delete(string $table_name, $id) {
+        $sql = "DELETE FROM $table_name WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$id]);
+    }
+
     protected function __construct() {
         $this->connect();
     }

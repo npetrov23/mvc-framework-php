@@ -6,7 +6,7 @@ class Rest {
         $class = self::$matches["module"] . "\\" . 'rest' . "\\" . self::$matches["rest"];
         $action = "action_" . self::$matches["action"];
         $rest = new $class;
-        $json = $rest->$action(self::$matches["id"]);
+        $json = $rest->$action();
 
         echo $json;
     }

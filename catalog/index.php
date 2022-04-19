@@ -14,13 +14,14 @@ $products = [
 	 "price" => 40],
 ];
 
+
+$model_products = new catalog\model\Product();
 // foreach($products as $product) {
-// 	$table = new Product();
+// 	$table = new catalog\model\Product();
 // 	$table->set($product);
 // 	$table->save();
 // }
 
-$model_products = new catalog\model\Product();
 $products = $model_products->find_all();
 
 
@@ -30,21 +31,25 @@ $products = $model_products->find_all();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<?echo Layout::get_instance()->get_static("grid.css");?>
 	<?echo Layout::get_instance()->include_css();?>
 	<title>Каталог</title>
 </head>
 <body>
 	<div class="catalog">
+	
 		<?foreach($products as $product) {?>
 			<div class="catalog__product">
+				<button type="submit" id="<?$product->id?>" class="catalog__delete-product">Удалить</button>
 				<div class="catalog__title"><a href="<?$product->id?>"><?$product->title?></a></div>
 				<div class="catalog__description"><?$product->description?></div>
 				<div class="catalog__price"><?$product->price?>р</div>
 			</div>
 		<?}?>
 	</div>
-
+	
+	<?echo Layout::get_instance()->get_static("delete_product.js");?>
 	<?echo Layout::get_instance()->include_js();?>
 </body>
 </html>

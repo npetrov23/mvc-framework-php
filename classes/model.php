@@ -89,6 +89,10 @@ class Model {
         return json_encode($this->properties);
     }
 
+    public function delete(int $id) {
+        return Db::get_instance()->delete($this->table_name, $id);
+    }
+
     public function __set($name, $value) {
         if(in_array($name, array_keys($this->table_column))) {
             $this->properties[$name] = $value;
