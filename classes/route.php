@@ -15,10 +15,13 @@ class Route {
         foreach($this->rules as $rule) {
             $preg = "#^{$rule["url"]}$#";
             $page = preg_match($preg, $this->url, $matches);
+            
             if($page) {
+                //print_r($rule);
                 $this->set_param($matches);
                 if(array_key_exists("controller", $rule)) {
-                    $this->controller_func_execute($rule["controller"]);
+                    
+                    $this->controller_func_execute($rule["controller"], $rule["action"]);
                     return;
                 }
                 if(array_key_exists("file", $rule)) {
@@ -31,9 +34,10 @@ class Route {
         throw new Exception("Page not found", 404);
     }
 
-    private function controller_func_execute(string $function) {
+    private function controller_func_execute(string $controller, string $action) {
         // if(method_exists('\Rest', $function)){
-            call_user_func($function);
+        $function = $controller . "::{$action}";
+        call_user_func($function);
         // }
     }
 
@@ -46,7 +50,7 @@ class Route {
         $this->rules = Config::get_config("route");
     }
 
-    private function get_url() {
+    public function get_url() {
         $this->url = $_SERVER['REQUEST_URI']; 
     }
 

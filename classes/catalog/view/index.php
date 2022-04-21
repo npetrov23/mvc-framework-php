@@ -1,4 +1,5 @@
 <?
+View::get_instance()->title = "Каталог";
 $products = [
 	["title" => "Товар1",
 	 "description" => "Описание товара 1",
@@ -26,22 +27,14 @@ $products = $model_products->find_all();
 
 
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?echo Layout::get_instance()->get_static("grid.css");?>
-	<?echo Layout::get_instance()->include_css();?>
-	<title>Каталог</title>
-</head>
-<body>
+
 	<div class="catalog">
 	
 		<?foreach($products as $product) {?>
 			<div class="catalog__product">
 				<button type="submit" id="<?$product->id?>" class="catalog__delete-product">Удалить</button>
-				<div class="catalog__title"><a href="<?$product->id?>"><?$product->title?></a></div>
+				<div class="catalog__title"><a href="product/<?$product->id?>"><?$product->title?></a></div>
 				<div class="catalog__description"><?$product->description?></div>
 				<div class="catalog__price"><?$product->price?>р</div>
 			</div>
@@ -49,8 +42,3 @@ $products = $model_products->find_all();
 	</div>
 	
 	<?echo Layout::get_instance()->get_static("delete_product.js");?>
-	<?echo Layout::get_instance()->include_js();?>
-</body>
-</html>
-
-
