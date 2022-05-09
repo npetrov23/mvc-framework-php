@@ -21,7 +21,7 @@ $products = [
 
 // $model_products = new module\catalog\model\Product();
 // foreach($products as $product) {
-// 	$table = new catalog\model\Product();
+// 	$table = Model::factory(["name" => "product", "module" => "catalog"]);
 // 	$table->set($product);
 // 	$table->save();
 // }
@@ -29,11 +29,12 @@ $products = [
 $model_products = Model::factory(["name" => "product", "module" => "catalog"]);
 $products = $model_products->find_all();
 
+
 ?>
 	<?echo Layout::get_instance()->get_static("grid.css");?>
-
+	<a href="<?echo $model_products->create_url()?>">Создать товар</a>
 	<div class="catalog">
-	
+		
 		<?foreach($products as $product) {?>
 			<div class="catalog__product">
 				<button type="submit" id="<?$product->id?>" class="catalog__delete-product">Удалить</button>

@@ -6,6 +6,7 @@ class Model {
     protected $primary_key = "id";
     protected $properties = [];
     protected $loaded = false;
+    protected $module = "catalog";
     //protected $id;
 
     public static function factory(array $info_about_model) {
@@ -45,6 +46,7 @@ class Model {
     }
 
     public function __construct($id = 0) {
+        // var_dump(get_class($this));
         $this->check_table();
         if($id) {
             $this->get($id);
@@ -127,6 +129,21 @@ class Model {
 
     public function delete(int $id) {
         return Db::get_instance()->delete($this->table_name, $id);
+    }
+
+    public function create_url() {
+        return "/$this->module/view/create";
+    }
+
+    public function get_label() : array {
+        $fields_form = [];
+        foreach($this->table_column as $name_column => $param_column) {
+            if(array_key_exists("label", $param_column)) {
+                $fields_form[$name_column] = $param_column; 
+            }
+        }
+        
+        return $fields_form;
     }
 
     public function __set($name, $value) {
