@@ -1,7 +1,7 @@
 <?
-namespace catalog\model;
-
-class Product extends \Model {
+namespace module\catalog\model;
+use Model;
+class Product extends Model {
     protected $table_name = "products";    
     protected $table_column = [
         "id" => ["type" => \Db::T_INT],

@@ -1,4 +1,7 @@
 <?
+
+use module\catalog\model\Product;
+
 View::get_instance()->title = "Каталог";
 $products = [
 	["title" => "Товар1",
@@ -16,15 +19,15 @@ $products = [
 ];
 
 
-$model_products = new catalog\model\Product();
+// $model_products = new module\catalog\model\Product();
 // foreach($products as $product) {
 // 	$table = new catalog\model\Product();
 // 	$table->set($product);
 // 	$table->save();
 // }
 
+$model_products = Model::factory(["name" => "product", "module" => "catalog"]);
 $products = $model_products->find_all();
-
 
 ?>
 	<?echo Layout::get_instance()->get_static("grid.css");?>

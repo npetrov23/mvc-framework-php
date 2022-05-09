@@ -19,6 +19,7 @@ class Route {
             if($page) {
                 //print_r($rule);
                 $this->set_param($matches);
+                
                 if(array_key_exists("controller", $rule)) {
                     
                     $this->controller_func_execute($rule["controller"], $rule["action"]);
@@ -36,6 +37,7 @@ class Route {
 
     private function controller_func_execute(string $controller, string $action) {
         // if(method_exists('\Rest', $function)){
+            
         $function = $controller . "::{$action}";
         call_user_func($function);
         // }

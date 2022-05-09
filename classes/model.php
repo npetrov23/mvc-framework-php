@@ -8,6 +8,42 @@ class Model {
     protected $loaded = false;
     //protected $id;
 
+    public static function factory(array $info_about_model) {
+        $module = "";
+        $component = "";
+        $id = "";
+
+        if(!array_key_exists("name", $info_about_model)) {
+            throw new Exception("name dont exists", 500);
+        }
+
+        $name = $info_about_model["name"];
+
+        if(array_key_exists("module", $info_about_model)) {
+            $module = $info_about_model["module"];
+        }
+
+        if(array_key_exists("id", $info_about_model)) {
+            $id = $info_about_model["id"];
+        }
+
+        if(array_key_exists("component", $info_about_model)) {
+            $component = $info_about_model["component"];
+        }
+
+        $namespace = "";
+        if($module) {
+            $namespace .= "module\\$module";
+        }
+        if($component) {
+            $namespace .= "\\$component";
+        }
+
+        $namespace .= "\model\\$name";
+        // echo $namespace;
+        return new $namespace($id);
+    }
+
     public function __construct($id = 0) {
         $this->check_table();
         if($id) {

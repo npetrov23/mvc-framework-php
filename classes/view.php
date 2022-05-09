@@ -15,10 +15,10 @@ class View {
         $root = self::get_url();
         self::$path_main_template = $root . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "template.php";
         self::$path_view = $root;
-
+        
         if(array_key_exists("module", $matches)) {
-            if(file_exists(self::$path_view . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $matches["module"])){
-                self::$path_view .= DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $matches["module"];
+            if(file_exists(self::$path_view . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . "module" . DIRECTORY_SEPARATOR . $matches["module"])){
+                self::$path_view .= DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . "module" . DIRECTORY_SEPARATOR . $matches["module"];
             }
             else
             {
