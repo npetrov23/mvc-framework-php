@@ -2,7 +2,6 @@
 use component\form\Main;
 $fields = Main::get_fields_model();
 ?>
-
 <form  method="POST" action="/catalog/rest/product/create/">
 
 <?
@@ -16,13 +15,13 @@ foreach($fields as $field => $param_field) {
     
     switch ($type) {
         case Db::T_VARCHAR:
-            View::include("string", "", "form", ["form_name" => $param_field["label"], "form_required" => $param_field["null"]]);
+            View::include("string", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
         case Db::T_TEXTAREA:
-            View::include("textarea", "", "form", ["form_name" => $param_field["label"], "form_required" => $param_field["null"]]);
+            View::include("textarea", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
         case Db::T_INT:
-            View::include("int", "", "form", ["form_name" => $param_field["label"], "form_required" => $param_field["null"]]);
+            View::include("int", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
     }
 }
@@ -31,4 +30,3 @@ foreach($fields as $field => $param_field) {
 <button type="submit">Создать товар</button>
 </form>
 
-<?echo Layout::get_instance()->get_static("create_product.js");?>

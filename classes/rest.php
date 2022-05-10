@@ -12,7 +12,6 @@ class Rest {
         }
         else
         {
-            
             throw new Exception("Page not found", 404);
         }
 
