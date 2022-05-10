@@ -14,6 +14,11 @@ return [
         'action' => 'dispatch',
     ], 
     [
+        'url' => '/(?<module>[^/]*)/rest/(?<rest>[^/]*)/(?<action>[^/]*)/',
+        'controller' => '\Rest',
+        'action' => 'dispatch',
+    ], 
+    [
         'url' => '/(?<module>[^/]*)/view/(?<name>[^/]*)/(?<id>[^/]*)/(?<info>[^/]*)/',
         'controller' => '\View',
         'action' => 'dispatch',

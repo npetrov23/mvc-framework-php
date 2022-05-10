@@ -6,8 +6,8 @@ class Model {
     protected $primary_key = "id";
     protected $properties = [];
     protected $loaded = false;
-    protected $module = "catalog";
-    //protected $id;
+    protected $module = "";
+    protected $model = "";
 
     public static function factory(array $info_about_model) {
         $module = "";
@@ -46,10 +46,23 @@ class Model {
     }
 
     public function __construct($id = 0) {
-        // var_dump(get_class($this));
+        $this->info();
         $this->check_table();
         if($id) {
             $this->get($id);
+        }
+    }
+
+    private function info() {
+        $class = get_class($this);
+        $info = explode("\\", $class);
+        foreach($info as $key => $elem) {
+            if($elem == "module") {
+                $this->module = $info[++$key];
+            }
+            if($elem == "model") {
+                $this->model = $info[++$key];
+            }
         }
     }
     

@@ -22,6 +22,7 @@ class Product {
         $model = \Model::factory(["name" => "product", "module" => "catalog"]);
         $model->set($_POST);
         $model->save();
+        header("Location: http://localhost/catalog/view/");
     }
 }
 

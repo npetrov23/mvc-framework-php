@@ -8,6 +8,7 @@ class Db {
     const T_NOT_NULL = "NOT NULL";
     const T_NULL = "NULL";
     const A_I = "AUTO_INCREMENT";
+    const T_TEXTAREA = "TEXTAREA";
 
     public static function get_instance() {
 		if(!isset(self::$instance)) {
