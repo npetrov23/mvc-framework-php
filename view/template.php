@@ -8,7 +8,8 @@
     <title><?echo View::get_instance()->title?></title>
 </head>
 <body>
-    <?echo View::get_instance()->content ?>
+    <?
+    echo View::get_instance()->content ?>
     <?echo Layout::get_instance()->include_js();?>
 </body>
 </html>

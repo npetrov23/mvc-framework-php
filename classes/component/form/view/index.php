@@ -15,13 +15,13 @@ foreach($fields as $field => $param_field) {
     
     switch ($type) {
         case Db::T_VARCHAR:
-            View::include("string", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
+            echo View::include("string", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
         case Db::T_TEXTAREA:
-            View::include("textarea", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
+            echo View::include("textarea", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
         case Db::T_INT:
-            View::include("int", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
+            echo View::include("int", "", "form", ["form_label" => $param_field["label"], "form_required" => $param_field["null"], "form_name" => $field]);
             break;
     }
 }

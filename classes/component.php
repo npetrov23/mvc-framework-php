@@ -24,6 +24,6 @@ class Component {
     }
 
     public function render() {
-        View::include("index", "", "form");
+        echo View::include("index", "", "form");
     }
 }

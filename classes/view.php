@@ -51,9 +51,14 @@ class View {
         self::render($name, $module);
     }
 
-    public static function render($name, $module) {
-        self::$param["content"] = self::include($name, $module);
+    public static function render($name, $module = "", $component = "", $param = "") {
+        self::$param["content"] = self::include($name, $module, $component, $param);
         include self::$path_main_template;
+    }
+
+    public static function render2($name, $module = "", $component = "", $param = "") {
+        self::$param["content"] = self::include($name, $module, $component, $param);
+        echo self::$param["content"];
     }
 
     public static function include($name, $module = "", $component = "", $param = "") {
@@ -66,11 +71,11 @@ class View {
         if($param) {
             self::$param["param"] = $param;
         }
-        // echo self::$path_view;
+
         if(file_exists(self::$path_view)){
-            // ob_start();
+            ob_start();
             include self::$path_view;
-            // return ob_get_clean();
+            return ob_get_clean();
         }
         else
         {
