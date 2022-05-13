@@ -16,35 +16,23 @@ class View {
         $matches = \Route::get_instance()->get_param();
         self::$root = self::get_url();
         self::$path_main_template = self::$root . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "template.php";
-        // self::$path_view = $root;
         $name = "";
         $module = "";
+        $info = "";
 
         if(array_key_exists("module", $matches)) {
-            if(file_exists(self::$root . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . "module" . DIRECTORY_SEPARATOR . $matches["module"])){
-                // self::$path_view .= DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $matches["module"];
-                $module = $matches["module"];
-            }
-            else
-            {
-                // throw new Exception("Page not found", 404);
-            }
+            $module = $matches["module"];
         }
+
+        if(array_key_exists("info", $matches)) {
+            $info = $matches["info"];
+        }
+
         if(array_key_exists("name", $matches)) {
-            
-            if(file_exists(self::$root . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . "module" . DIRECTORY_SEPARATOR . $matches["module"] . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . $matches["name"] . ".php")){
-                // self::$path_view .= DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . $matches["name"] . ".php";
-                $name = $matches["name"]; 
-            }
-            else
-            {
-                
-                // throw new Exception("Page not found", 404);
-            }
+            $name = $matches["name"]; 
         }
         else
         {
-            // self::$path_view .= DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "index.php";
             $name = "index"; 
         }
         
@@ -54,11 +42,6 @@ class View {
     public static function render($name, $module = "", $component = "", $param = "") {
         self::$param["content"] = self::include($name, $module, $component, $param);
         include self::$path_main_template;
-    }
-
-    public static function render2($name, $module = "", $component = "", $param = "") {
-        self::$param["content"] = self::include($name, $module, $component, $param);
-        echo self::$param["content"];
     }
 
     public static function include($name, $module = "", $component = "", $param = "") {

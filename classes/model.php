@@ -103,7 +103,6 @@ class Model {
 
     public function set($properties) {
         foreach($properties as $name => $value) {
-            
             $this->$name = $value;
         }
     }
